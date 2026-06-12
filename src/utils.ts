@@ -54,7 +54,7 @@ export function parseMarkdownToHtml(markdown: string): string {
   html = html.replace(/^# (.*$)/gim, '<h1 class="font-display font-extrabold text-2xl text-slate-950 mt-10 mb-4 pb-2 border-b-2 border-slate-200">$1</h1>');
 
   // Bold / Italic
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*\*(.*?)\*\//g, '<strong>$1</strong>');
   html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
   // Blockquotes
@@ -131,12 +131,12 @@ export function downloadTxtFile(filename: string, content: string) {
 
 // In-browser mock defaults
 export const DEFAULT_USER_PROFILE: UserProfile = {
-  fullName: 'Lê Minh Quốc',
-  title: 'Chuyên viên Tổng hợp Cao cấp',
-  agency: 'Văn phòng UBND Tỉnh Quảng Nam',
+  fullName: 'Lý Trung Trường',
+  title: 'Chuyên viên Tổng hợp',
+  agency: 'Ủy ban MTTQ Việt Nam tỉnh Điện Biên',
   writingStyle: 'Trang trọng, chuẩn chỉ Nghị định 30/2020-CP, lý luận chặt chẽ',
-  customInstructions: 'Luôn đưa giải pháp cụ thể trong báo cáo, tập trung vào công tác đổi mới sáng tạo và cải cách thủ tục hành chính.',
-  location: 'Quảng Nam'
+  customInstructions: 'Luôn tập trung vào công tác mặt trận, tăng cường khối đại đoàn kết toàn dân tộc, và hỗ trợ đời sống nhân dân tỉnh Điện Biên.',
+  location: 'Điện Biên'
 };
 
 export const DEFAULT_TASKS: TaskItem[] = [
@@ -152,7 +152,7 @@ export const DEFAULT_TASKS: TaskItem[] = [
   {
     id: 't-2',
     title: 'Ký phê duyệt Kế hoạch Số hóa hồ sơ cán bộ công chức',
-    description: 'Trình Lãnh đạo Sở Nội vụ ký hồ sơ kế hoạch phối hợp với bưu điện tập huấn số hóa văn bản.',
+    description: 'Trình Lãnh đạo lãnh đạo ký hồ sơ kế hoạch phối hợp với bưu điện tập huấn số hóa văn bản.',
     category: 'urgent-important',
     dueDate: '2026-06-13',
     progress: 90,
@@ -203,38 +203,26 @@ export const DEFAULT_MEETINGS: MeetingItem[] = [
     dateTime: '2026-06-15T14:00',
     participants: 'Toàn thể đảng viên Chi bộ Văn phòng',
     location: 'Hội trường Lớn',
-    agenda: 'Đánh giá xếp loại đảng viên 6 tháng đầu năm và triển khai học tập nghị quyết công tác Đảng quý mới.'
+    agenda: 'Đánh giá xếp loại đảng viên 6 tháng đầu năm 2026.',
+    rawNotes: 'Họp bình xét thi đua khen thưởng cho các cán bộ, chuyên viên hoàn thành xuất sắc nhiệm vụ trong nửa đầu năm.'
   }
 ];
-
-export const DEFAULT_INTEGRATIONS: IntegrationConfigs = {
-  gmailEmail: 'lytrungtruongmttqdb@gmail.com',
-  gmailEnabled: true,
-  telegramBotToken: '584950392:AAFG-Xy9_293jsF8392Xjs',
-  telegramChatId: '-100293849502',
-  telegramEnabled: false,
-  notionApiKey: 'ntn_3209583_9238fjlsdjfHskfjlskf',
-  notionPageId: 'f8392c023d24e930f3c092021',
-  notionEnabled: false,
-  webhookUrl: 'https://n8n.myagency.gov.vn/webhook/executive-assistant',
-  webhookEnabled: true
-};
 
 export const DEFAULT_BULLETIN_DATA: NewsBulletin = {
   date: 'Thứ Sáu, ngày 12 tháng 06 năm 2026',
   weather: {
-    location: 'Quảng Nam',
-    temperature: '26 - 34°C',
-    humidity: '75%',
-    uvIndex: '11 (Cực kỳ nguy hại)',
-    airQuality: 'AQI: 65 - Trung bình',
-    recommendation: 'Không khí ngoài trời tương đối ổn định. Tuy nhiên chỉ số tia cực tím cực kỳ cao vào khoảng từ 11:00 đến 14:00, kính đề nghị Lãnh đạo mang theo mũ rộng vành, kính râm và ô che nắng khi đi kiểm tra thực địa.'
+    location: 'Điện Biên',
+    temperature: '25 - 32°C',
+    humidity: '78%',
+    uvIndex: '10 (Rất cao)',
+    airQuality: 'AQI: 52 - Tốt',
+    recommendation: 'Không khí tại tỉnh Điện Biên ngoài trời tương đối mát mẻ và ôn hòa, rất thuận lợi cho công tác tuần tra cơ sở. Tuy nhiên chỉ số tia cực tím cao vào khoảng trưa, kính đề nghị Lãnh đạo trang bị ô gập, kính râm và uống đủ nước khi đi khảo sát thực tế tại các bản làng vùng cao.'
   },
   news: [
     {
       category: 'Tin Nổi Bật',
-      title: 'Thủ tướng chủ trì Hội nghị chuyển đổi số quốc gia lần thứ 12',
-      summary: 'Hội nghị tập trung tháo gỡ điểm nghẽn thể chế số và chia sẻ mô hình dữ liệu tập trung cấp tỉnh. Khuyến nghị chú trọng ứng dụng AI phân tích số liệu.'
+      title: 'Điện Biên đẩy mạnh phong trào Toàn dân đoàn kết xây dựng đời sống văn hóa',
+      summary: 'Ủy ban Mặt trận Tổ quốc tỉnh Điện Biên phát động chiến dịch thi đua, hỗ trợ xóa nhà tạm cho các hộ gia đình chính sách và đồng bào nghèo tại các huyện biên giới.'
     },
     {
       category: 'Tin AI & Công Nghệ',
@@ -242,14 +230,27 @@ export const DEFAULT_BULLETIN_DATA: NewsBulletin = {
       summary: 'Trợ lý AI hỗ trợ rà soát 25,000 văn bản quy phạm pháp luật chỉ trong 5 giây, bảo đảm tham chiếu đúng điều khoản và tránh mâu thuẫn chính sách.'
     },
     {
-      category: 'Tin Hành Chính Công',
-      title: 'Quảng Nam dẫn đầu chỉ số hài lòng của người dân (SIPAS) Quý I',
-      summary: 'Nỗ lực số hóa triệt để 100% hồ sơ một cửa và thúc đẩy quyết liệt mô hình hỗ trợ hành chính lưu động tại cơ sở đã đạt quả ngọt.'
+      category: 'Tin Mặt Trận Số',
+      title: 'Điện Biên ứng dụng chuyển đổi số trong khảo sát ý kiến người dân',
+      summary: 'Kế hoạch triển khai quét mã QR tại các Ban công tác Mặt trận khu phố bản làng giúp ghi nhận nhanh ý kiến, kiến nghị chính đáng của đồng bào cử tri.'
     },
     {
       category: 'Tin Địa Phương',
-      title: 'Khơi thông dòng chảy sông Cổ Cò thúc đẩy liên kết vùng đô thị',
-      summary: 'Phó Chủ tịch UBND tỉnh chỉ đạo đẩy nhanh tiến độ nạo vét trước mùa mưa lũ, mở ra hướng phát triển du lịch sinh thái kết nối Đà Nẵng - Hội An.'
+      title: 'Đoàn đại biểu Mặt trận Tổ quốc làm việc tại các xã vùng cao Điện Biên Đông',
+      summary: 'Lãnh đạo Ủy ban chỉ đạo khảo sát hiệu quả các quỹ hỗ trợ sinh kế nông nghiệp, thúc đẩy sản xuất bền vững cho đồng bào các dân tộc thiểu số.'
     }
   ]
+};
+
+export const DEFAULT_INTEGRATIONS: IntegrationConfigs = {
+  gmailEmail: 'lytrungtruongmttqdb@gmail.com',
+  gmailEnabled: false,
+  telegramBotToken: '',
+  telegramChatId: '',
+  telegramEnabled: false,
+  notionApiKey: '',
+  notionPageId: '',
+  notionEnabled: false,
+  webhookUrl: 'https://n8n.system.mttq.gov.vn/webhook/office-assistant',
+  webhookEnabled: false
 };

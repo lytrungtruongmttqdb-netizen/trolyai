@@ -15,6 +15,7 @@ import MeetingManager from './components/MeetingManager';
 import AISec from './components/AISec';
 import KnowledgeHub from './components/KnowledgeHub';
 import IntegrationTester from './components/IntegrationTester';
+import Login from './components/Login';
 
 // Import Icons
 import { 
@@ -40,6 +41,9 @@ export default function App() {
   const [tasks, setTasks] = useState<TaskItem[]>(DEFAULT_TASKS);
   const [bulletin, setBulletin] = useState<NewsBulletin | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return localStorage.getItem('ai_assistant_is_logged_in') === 'true';
+  });
 
   // Load profile, tasks and bulletin from localStorage on app bootstrap
   useEffect(() => {
@@ -117,6 +121,24 @@ export default function App() {
     },
   ];
 
+  if (!isLoggedIn) {
+    return (
+      <Login 
+        onLoginSuccess={(name, agency) => {
+          localStorage.setItem('ai_assistant_is_logged_in', 'true');
+          const updatedProfile = {
+            ...userProfile,
+            fullName: name || 'Lý Trung Trường',
+            agency: agency || 'Ủy ban MTTQ Việt Nam tỉnh Điện Biên'
+          };
+          setUserProfile(updatedProfile);
+          localStorage.setItem('ai_assistant_profile', JSON.stringify(updatedProfile));
+          setIsLoggedIn(true);
+        }} 
+      />
+    );
+  }
+
   return (
     <div id="executive_agency_shell" className="min-h-screen bg-slate-50 flex font-sans antialiased text-slate-800">
       
@@ -137,12 +159,12 @@ export default function App() {
           {/* Brand header */}
           <div className="h-16 border-b border-white/10 px-6 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-display font-black text-sm text-white">
-                EE
+              <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center font-display font-medium text-amber-300 text-xs shadow-inner">
+                ★
               </div>
-              <div>
-                <h3 className="font-extrabold text-sm tracking-tight font-display text-white">EXECUTIVE ASSISTANT</h3>
-                <p className="text-[9px] text-indigo-400 font-semibold tracking-wider uppercase">Trợ lý điều hành AI</p>
+              <div className="overflow-hidden">
+                <h3 className="font-extrabold text-[11px] tracking-tight font-display text-white truncate">MTTQ TỈNH ĐIỆN BIÊN</h3>
+                <p className="text-[8px] text-amber-400 font-bold tracking-wider uppercase truncate">Trợ lý điều hành AI</p>
               </div>
             </div>
             
@@ -201,9 +223,18 @@ export default function App() {
         </div>
 
         {/* Footer brand standard */}
-        <div className="p-4 border-t border-white/5 text-[9px] text-slate-500 font-mono text-center">
-          <p>Trợ Lý Văn Phòng Tỉnh uỷ</p>
-          <p className="mt-0.5 text-slate-600">Bảo mật dữ liệu tuyệt đối</p>
+        <div className="p-4 border-t border-white/5 text-[9px] text-slate-500 font-mono text-center flex flex-col gap-1 items-center justify-center">
+          <p className="font-bold text-slate-400 text-[10px]">ỦY BAN MTTQ ĐIỆN BIÊN</p>
+          <p className="text-slate-600">Bảo mật dữ liệu công vụ</p>
+          <button 
+            onClick={() => {
+              localStorage.removeItem('ai_assistant_is_logged_in');
+              setIsLoggedIn(false);
+            }}
+            className="mt-1 px-2.5 py-0.5 bg-red-950/40 border border-red-850/50 hover:bg-red-900/40 hover:text-red-200 text-red-400 font-bold rounded text-[9px] transition-colors cursor-pointer"
+          >
+            Đăng Xuất
+          </button>
         </div>
       </aside>
 
