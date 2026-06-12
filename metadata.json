@@ -1,0 +1,6 @@
+{
+  "name": "AI Executive Assistant",
+  "description": "AI Executive Assistant for task management and document drafting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
